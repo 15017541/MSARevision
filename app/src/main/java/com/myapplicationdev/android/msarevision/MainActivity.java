@@ -1,5 +1,6 @@
 package com.myapplicationdev.android.msarevision;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnAdd, btnShow;
+    Button btnAdd, btnShow, btnNewActivity;
     TextView tvResult;
     ListView lv;
     ArrayAdapter<String> aa;
@@ -28,6 +29,15 @@ public class MainActivity extends AppCompatActivity {
         btnShow = (Button) this.findViewById(R.id.btnShow);
         tvResult = (TextView) this.findViewById(R.id.tvResult);
         lv = (ListView) this.findViewById(R.id.lv);
+        btnNewActivity = (Button) this.findViewById(R.id.btnNewAct);
+
+        btnNewActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, FragmentActivity.class);
+                startActivity(i);
+            }
+        });
 
         al = new ArrayList<>();
         aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, al);
