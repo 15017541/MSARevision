@@ -1,4 +1,4 @@
-package layout;
+package com.myapplicationdev.android.msarevision;
 
 
 import android.os.Bundle;
@@ -6,8 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.myapplicationdev.android.msarevision.R;
 
 /**
  * A simple {@link Fragment} subclass.
