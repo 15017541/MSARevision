@@ -5,49 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.myapplicationdev.android.msarevision.MainActivity">
+    tools:context="com.myapplicationdev.android.msarevision.FilteredActivity">
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/btnNewAct"
+            android:id="@+id/btnR1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Activity"/>
+            android:text="Female only"/>
 
         <Button
-            android:id="@+id/btnFiltered"
+            android:id="@+id/btnR2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Examples of filtered records"/>
+            android:text="Female starts with Mary"/>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add record"/>
 
     <Button
-        android:id="@+id/btnShow"
+        android:id="@+id/btnR3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show record"/>
+        android:text="Contains Jack or contains Mary"/>
 
-    <TextView
-        android:id="@+id/tvResult"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btnR4"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No records"/>
+        android:text="Contains Pan and height > 1.6"/>
 
     <ListView
         android:id="@+id/lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
 
 </LinearLayout>

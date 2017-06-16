@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".FragmentActivity" />
         <activity android:name=".AddActivity" />
-        <activity android:name=".ModifyActivity"></activity>
+        <activity android:name=".ModifyActivity" />
+        <activity android:name=".FilteredActivity"></activity>
     </application>
 
 </manifest>

@@ -60,7 +60,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         db.insert(DB_TABLE, null, cv);
 
         cv = new ContentValues();
-        cv.put(COL_NAME, "Jackie Chan");
+        cv.put(COL_NAME, "Jackie Mary");
         cv.put(COL_GENDER, "Male");
         cv.put(COL_HEIGHT, 1.61);
         db.insert(DB_TABLE, null, cv);
@@ -72,7 +72,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         db.insert(DB_TABLE, null, cv);
 
         cv = new ContentValues();
-        cv.put(COL_NAME, "Tarzan Jane");
+        cv.put(COL_NAME, "Pan Jane");
         cv.put(COL_GENDER, "Female");
         cv.put(COL_HEIGHT, 1.7);
         db.insert(DB_TABLE, null, cv);
@@ -140,8 +140,8 @@ public class DBHelper  extends SQLiteOpenHelper{
     }
 
 
-    public ArrayList<String> getContactContentByGender(String genderSelection){
-        ArrayList<String> al = new ArrayList<>();
+    public ArrayList<Contact> getContactsByGender(String genderSelection){
+        ArrayList<Contact> al = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
         String [] cols = {COL_ID, COL_NAME, COL_GENDER, COL_HEIGHT};
@@ -155,7 +155,7 @@ public class DBHelper  extends SQLiteOpenHelper{
                 String name = cursor.getString(1);
                 String gender = cursor.getString(2);
                 double height = cursor.getDouble(3);
-                String data = id + ", " + name + ", "+ gender + ", " + height;
+                Contact data = new Contact(name, id, height, gender );
                 al.add(data);
             }while (cursor.moveToNext());
         }
@@ -172,6 +172,54 @@ public class DBHelper  extends SQLiteOpenHelper{
         String [] cols = {COL_ID, COL_NAME, COL_GENDER, COL_HEIGHT};
         String condition = "gender = ? and name like ?";
         String [] args = {genderSelection, namePrefix + "%"};
+
+        Cursor cursor = db.query(DB_TABLE, cols, condition, args, null, null, null);
+        if (cursor.moveToFirst()){
+            do{
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String gender = cursor.getString(2);
+                double height = cursor.getDouble(3);
+                Contact data = new Contact(name, id, height, gender );
+                al.add(data);
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return al;
+    }
+
+    public ArrayList<Contact> getContacts(String keyword1, String keyword2){
+        ArrayList<Contact> al = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String [] cols = {COL_ID, COL_NAME, COL_GENDER, COL_HEIGHT};
+        String condition = "name like ? or name like ?";
+        String [] args = {"%" + keyword1 + "%", "%" + keyword2 + "%"};
+
+        Cursor cursor = db.query(DB_TABLE, cols, condition, args, null, null, null);
+        if (cursor.moveToFirst()){
+            do{
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String gender = cursor.getString(2);
+                double height = cursor.getDouble(3);
+                Contact data = new Contact(name, id, height, gender );
+                al.add(data);
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return al;
+    }
+
+    public ArrayList<Contact> getContactsNameHeight(String keyword1, double heightconiditon){
+        ArrayList<Contact> al = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String [] cols = {COL_ID, COL_NAME, COL_GENDER, COL_HEIGHT};
+        String condition = "name like ? and height > ?";
+        String [] args = {"%" + keyword1 + "%", heightconiditon+ ""};
 
         Cursor cursor = db.query(DB_TABLE, cols, condition, args, null, null, null);
         if (cursor.moveToFirst()){

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnAdd, btnShow, btnNewActivity;
+    Button btnAdd, btnShow, btnNewActivity, btnFiltered;
     TextView tvResult;
     ListView lv;
     ContactAdapter ca;
@@ -31,11 +31,20 @@ public class MainActivity extends AppCompatActivity {
         tvResult = (TextView) this.findViewById(R.id.tvResult);
         lv = (ListView) this.findViewById(R.id.lv);
         btnNewActivity = (Button) this.findViewById(R.id.btnNewAct);
+        btnFiltered = (Button) this.findViewById(R.id.btnFiltered);
 
         btnNewActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, FragmentActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btnFiltered.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, FilteredActivity.class);
                 startActivity(i);
             }
         });
