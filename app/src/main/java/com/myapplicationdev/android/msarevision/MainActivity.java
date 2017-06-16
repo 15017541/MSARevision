@@ -1,14 +1,15 @@
 package com.myapplicationdev.android.msarevision;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -46,9 +47,8 @@ public class MainActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBHelper dh = new DBHelper(MainActivity.this);
-                dh.insertContact("Jack", "Male", 1.69);
-                dh.close();
+                Intent i = new Intent (MainActivity.this, AddActivity.class);
+                startActivityForResult(i, 0);
             }
         });
 
@@ -57,13 +57,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DBHelper dh = new DBHelper(MainActivity.this);
                 ArrayList <String> al_tv = dh.getContactContentSQL();
-                //Log.d("ArrayList obj", al + "");
-                String data = "";
-                for (int i = 0; i< al_tv.size(); i++){
-                    Log.d("Al content", al_tv.get(i));
-                    data += al_tv.get(i) + "\n";
-                }
-                tvResult.setText(data);
 
                 al.clear();
                 al.addAll(al_tv);
@@ -73,5 +66,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        tvResult.setText("Records are now shown in the ListView");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 0){
+            if (resultCode == Activity.RESULT_OK){
+                Toast.makeText(MainActivity.this, "A new record was inserted. Refreshing....", Toast.LENGTH_SHORT).show();
+                DBHelper dh = new DBHelper(MainActivity.this);
+                ArrayList <String> al_tv = dh.getContactContentSQL();
+                dh.close();
+                al.clear();
+                al.addAll(al_tv);
+                aa.notifyDataSetChanged();
+            }
+        } else if (requestCode == 1){
+            if (resultCode == Activity.RESULT_OK){
+                Toast.makeText(MainActivity.this, "A record was modified/deleted. Refreshing....", Toast.LENGTH_SHORT).show();
+                DBHelper dh = new DBHelper(MainActivity.this);
+                ArrayList <String> al_tv = dh.getContactContentSQL();
+                dh.close();
+                al.clear();
+                al.addAll(al_tv);
+                aa.notifyDataSetChanged();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
