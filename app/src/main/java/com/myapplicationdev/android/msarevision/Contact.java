@@ -1,10 +1,12 @@
 package com.myapplicationdev.android.msarevision;
 
+import java.io.Serializable;
+
 /**
  * Created by jason_lim on 14/6/2017.
  */
 
-public class Contact  {
+public class Contact  implements Serializable{
 
     private String name;
     private int id;
@@ -34,4 +36,18 @@ public class Contact  {
         return gender;
     }
 
+    public Contact setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Contact setHeight(double height) {
+        this.height = height;
+        return this;
+    }
+
+    public Contact setGender(String gender) {
+        this.gender = gender;
+        return this;
+    }
 }

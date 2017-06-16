@@ -210,4 +210,25 @@ public class DBHelper  extends SQLiteOpenHelper{
         db.close();
         return al;
     }
+
+    public void updateContact(Contact data){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COL_NAME, data.getName());
+        cv.put(COL_GENDER, data.getGender());
+        cv.put(COL_HEIGHT, data.getHeight());
+        int id = data.getId();
+        String condition = COL_ID + " = ?";
+        String [] args = {id+""};
+        db.update(DB_TABLE, cv, condition, args);
+        db.close();
+    }
+
+    public void deleteContact(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String condition = COL_ID + " = ?";
+        String [] args = {id+""};
+        db.delete(DB_TABLE, condition, args);
+        db.close();
+    }
 }
