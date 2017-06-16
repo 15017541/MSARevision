@@ -82,17 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 al.addAll(al_tv);
                 aa.notifyDataSetChanged();
             }
-        } else if (requestCode == 1){
-            if (resultCode == Activity.RESULT_OK){
-                Toast.makeText(MainActivity.this, "A record was modified/deleted. Refreshing....", Toast.LENGTH_SHORT).show();
-                DBHelper dh = new DBHelper(MainActivity.this);
-                ArrayList <String> al_tv = dh.getContactContentSQL();
-                dh.close();
-                al.clear();
-                al.addAll(al_tv);
-                aa.notifyDataSetChanged();
-            }
-        }
+        } 
         super.onActivityResult(requestCode, resultCode, data);
     }
 }
